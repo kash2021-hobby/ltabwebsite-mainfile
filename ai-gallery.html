@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Gallery - Our Work Gallery | AI Growth Studio</title>
+    <meta name="description" content="Explore our AI-generated images and videos. See examples of our AI-powered content creation capabilities including image generation and video production.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Gallery - Our Work Gallery | AI Growth Studio">
+    <meta property="og:description" content="Explore our AI-generated images and videos. See examples of our AI-powered content creation capabilities.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blueantdigitech.com/ai-gallery.html">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Gallery - Our Work Gallery">
+    <meta name="twitter:description" content="Explore our AI-generated images and videos. See examples of our AI-powered content creation capabilities.">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NC6VZM7X');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Existing Styles -->
+    <link rel="stylesheet" crossorigin href="/assets/main-CEw2Pi_r.css">
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "AI Gallery",
+      "description": "Gallery showcasing AI-generated images and videos created by AI Growth Studio",
+      "url": "https://blueantdigitech.com/ai-gallery.html",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "BlueAnt DigiTech",
+        "url": "https://blueantdigitech.com"
+      }
+    }
+    </script>
+
+    <style>
+        /* Gallery-specific styles */
+        .gallery-hero {
+            padding-top: 120px;
+            padding-bottom: 40px;
+            text-align: center;
+        }
+
+        .gallery-hero h1 {
+            font-size: clamp(32px, 6vw, 48px);
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .gallery-section {
+            padding: 2rem 0 4rem 0;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 640px) {
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .video-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .video-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .video-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--muted);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .video-card:hover {
+            transform: scale(1.03);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-card-16x9 {
+            aspect-ratio: 16 / 9;
+        }
+
+        .video-card-9x16 {
+            aspect-ratio: 9 / 16;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-card:hover .video-overlay {
+            opacity: 1;
+        }
+
+        .play-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 212, 0, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--ink);
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover .play-icon {
+            transform: scale(1.1);
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            max-height: 90vh;
+            aspect-ratio: 16 / 9;
+        }
+
+        .lightbox-content.shorts {
+            max-width: 500px;
+            aspect-ratio: 9 / 16;
+        }
+
+        .lightbox-video {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: var(--accent);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 28px;
+            color: var(--ink);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+            font-weight: bold;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.1);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 212, 0, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            color: var(--ink);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--accent);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: -70px;
+        }
+
+        .lightbox-next {
+            right: -70px;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-close {
+                top: auto;
+                bottom: -70px;
+                right: 50%;
+                transform: translateX(50%);
+            }
+
+            .lightbox-prev, .lightbox-next {
+                top: auto;
+                bottom: -70px;
+                transform: translateY(0);
+            }
+
+            .lightbox-prev {
+                left: 20px;
+            }
+
+            .lightbox-next {
+                right: 20px;
+                left: auto;
+            }
+
+            .lightbox-content {
+                max-height: 70vh;
+            }
+        }
+
+        /* Loading State */
+        .video-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--accent);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NC6VZM7X"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="./" class="logo">
+                    <img src="/assets/ltab-logo-C3pUoJ4x.jpg" alt="LTAB Logo">
+                </a>
+
+                <nav class="nav">
+                    <a href="./">Home</a>
+                    <a href="./services/index.html">Services</a>
+                    <a href="/ai-gallery.html" class="active">Ai gallery</a>
+                    <!-- 
+                    <a href="./case-studies/index.html">Case Studies</a>
+                    -->
+                    <a href="./pricing/index.html">Pricing</a>
+                    <a href="./about/index.html">About</a>
+                </nav>
+
+                <div class="header-ctas">
+                    <a href="./contact/index.html" class="btn btn-primary">Book a Demo</a>
+                </div>
+
+                <button class="mobile-menu-btn" aria-label="Open menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <button class="mobile-close" aria-label="Close menu">×</button>
+        <a href="./">Home</a>
+        <a href="./services/index.html">Services</a>
+        <a href="/ai-gallery.html">Ai gallery</a>
+        <a href="./case-studies/index.html">Case Studies</a>
+        <a href="./pricing/index.html">Pricing</a>
+        <a href="./about/index.html">About</a>
+        <a href="./contact/index.html" class="btn btn-primary">Book a Demo</a>
+    </div>
+
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="container">
+            <h1>Check these AI generated content</h1>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="video-grid" id="videoGrid"></div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content" id="lightboxContent">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">&lt;</button>
+            <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">&gt;</button>
+            <div class="lightbox-video" id="lightboxVideo"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <div class="footer-links">
+                        <a href="./services/ai-videos.html">AI Videos</a>
+                        <a href="./services/social-automation.html">Social Automation</a>
+                        <a href="./services/ai-websites.html">AI Websites</a>
+                        <a href="./services/ai-ops.html">AI Ops Tools</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <div class="footer-links">
+                        <a href="./about/index.html">About</a>
+                        <a href="./case-studies/index.html">Case Studies</a>
+                        <a href="./contact/index.html">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <div class="footer-links">
+                        <a href="./legal/privacy.html">Privacy Policy</a>
+                        <a href="./legal/terms.html">Terms of Service</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <div class="footer-links">
+                        <a href="mailto:contactus@blueantdigitech.com">contactus@blueantdigitech.com</a>
+                        <a href="tel:+916000683808">+91 6000683808</a>
+                        <span>Guwahati, Assam</span>
+                    </div>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="https://linkedin.com/company/yourbrand" class="social-icon" aria-label="LinkedIn">in</a>
+                <a href="https://instagram.com/ltabai" class="social-icon" aria-label="Instagram">ig</a>
+                <a href="https://youtube.com/@ltabai" class="social-icon" aria-label="YouTube">yt</a>
+            </div>
+            <div class="footer-bottom">
+                <p>Data-safe by design · Human-in-the-loop replies · Platform-approved methods</p>
+                <p>&copy; 2025 AI Growth Studio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/916000683808" class="whatsapp-float" aria-label="WhatsApp" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo" style="width: 32px; height: 32px; object-fit: contain;">
+    </a>
+
+    <script>
+        // Video data with YouTube URLs
+        const videos = [
+            { url: 'https://youtube.com/shorts/kQ7YDvJbm_Y', aspectRatio: '9x16' },
+            { url: 'https://youtube.com/shorts/9q1AuZeCBDI?si=6LBYlw2g1c1bmplc', aspectRatio: '9x16' },
+            { url: 'https://youtube.com/shorts/h14C0vyDJFk?si=6Xv1tZTRHymWbxJl', aspectRatio: '9x16' },
+            { url: 'https://youtube.com/shorts/XJPWYmQtklw?si=9sIaQzoW1wz-p9ft', aspectRatio: '9x16' },
+            { url: 'https://youtu.be/R9crPaF9LnM?si=wGBhneXDv10yR8L4', aspectRatio: '16x9' },
+            { url: 'https://youtu.be/yed7Txi1r2o?si=3LWKAReMy8O0_Crf', aspectRatio: '16x9' },
+            { url: 'https://youtu.be/l3b-iT6vmws?si=t28N99UANev1Y1J1', aspectRatio: '16x9' },
+            { url: 'https://youtu.be/alatlp0z5oc?si=WjaFaO7QIZYbgxQ0', aspectRatio: '16x9' },
+
+
+            { url: 'https://youtu.be/o5wiWYONAi4?si=xKdE3sMCzAkSQh-b', aspectRatio: '16x9' },
+            { url: 'https://youtu.be/nR14EZIr93o?si=Nk3ZcLXSnXYyEo2a', aspectRatio: '16x9' },
+            { url: 'https://youtu.be/-4IvCkBdE-I?si=OYxxoMHbcAp8dI9d', aspectRatio: '16x9' },
+            { url: 'https://youtu.be/QmjQon8yHbY?si=Eipb83uJQQ1mNzSo', aspectRatio: '16x9' },
+            { url: 'https://youtu.be/bhKofPzDS3g?si=iD9ztsjTH1UYMqWU', aspectRatio: '16x9' },
+            { url: 'https://youtube.com/shorts/u11c8PiezjM?si=8WN2LrRPkSbucijs', aspectRatio: '9x16' },
+            { url: 'https://youtube.com/shorts/CAuXRC804rc?si=gLKtxwbYAgHfw-bb', aspectRatio: '9x16' },
+            { url: 'https://youtube.com/shorts/9PB2MMn2hgo?si=zUYpfxDYUnnEOacE', aspectRatio: '9x16' },
+            { url: 'https://youtube.com/shorts/RLG7PJyhdxs?si=oBN7H54DPL64AKm7', aspectRatio: '9x16' },
+            { url: 'https://youtube.com/shorts/XM-sTghDG7I?si=QF_mtg7tKv0A1iii', aspectRatio: '9x16' },
+            { url: 'https://youtube.com/shorts/_pUj_iRfNI4?si=BuSrlC0IcCuU2EWs', aspectRatio: '9x16' },
+            
+        ];
+
+        // Extract video ID from YouTube URL
+        function getVideoId(url) {
+            const shortMatch = url.match(/shorts\/([a-zA-Z0-9_-]+)/);
+            if (shortMatch) return shortMatch[1];
+
+            const regularMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+            if (regularMatch) return regularMatch[1];
+
+            const watchMatch = url.match(/watch\?v=([a-zA-Z0-9_-]+)/);
+            if (watchMatch) return watchMatch[1];
+
+            return null;
+        }
+
+        // Create video grid
+        function createVideoGrid() {
+            const grid = document.getElementById('videoGrid');
+
+            videos.forEach((video, index) => {
+                const videoId = getVideoId(video.url);
+                if (!videoId) return;
+
+                const card = document.createElement('div');
+                card.className = `video-card video-card-${video.aspectRatio}`;
+                card.dataset.index = index;
+
+                const thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
+                card.innerHTML = `
+                    <img src="${thumbnail}" alt="AI Generated Video ${index + 1}" class="video-thumbnail" loading="lazy">
+                    <div class="video-overlay">
+                        <div class="play-icon">▶</div>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => openLightbox(index));
+                grid.appendChild(card);
+            });
+        }
+
+        let currentVideoIndex = 0;
+        let player = null;
+
+        // Open lightbox
+        function openLightbox(index) {
+            currentVideoIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxContent = document.getElementById('lightboxContent');
+            const lightboxVideo = document.getElementById('lightboxVideo');
+            const video = videos[index];
+            const videoId = getVideoId(video.url);
+
+            if (video.aspectRatio === '9x16') {
+                lightboxContent.classList.add('shorts');
+            } else {
+                lightboxContent.classList.remove('shorts');
+            }
+
+            lightboxVideo.innerHTML = `
+                <iframe
+                    id="youtubePlayer"
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&mute=0&enablejsapi=1"
+                    frameborder="0"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                    style="border-radius: 12px;">
+                </iframe>
+            `;
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close lightbox
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxVideo = document.getElementById('lightboxVideo');
+
+            lightbox.classList.remove('active');
+            lightboxVideo.innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        // Navigate to previous video
+        function prevVideo() {
+            currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+            openLightbox(currentVideoIndex);
+        }
+
+        // Navigate to next video
+        function nextVideo() {
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            openLightbox(currentVideoIndex);
+        }
+
+        // Event listeners
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        document.getElementById('lightboxPrev').addEventListener('click', prevVideo);
+        document.getElementById('lightboxNext').addEventListener('click', nextVideo);
+
+        // Close on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevVideo();
+            if (e.key === 'ArrowRight') nextVideo();
+        });
+
+        // Mobile menu functionality (from main site)
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileClose = document.querySelector('.mobile-close');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+            });
+        }
+
+        if (mobileClose) {
+            mobileClose.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        }
+
+        // Initialize gallery on page load
+        document.addEventListener('DOMContentLoaded', createVideoGrid);
+    </script>
+</body>
+</html>
